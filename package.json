@@ -3,16 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "build": {
+    "appId": "pilmico-customer-capture-tool",
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/favicon-32x32.png",
+      "signingHashAlgorithms": [
+        "sha256"
+      ],
+      "publisherName": "BITs Development Team",
+      "verifyUpdateCodeSignature": false
+    }
+  },
   "scripts": {
     "start": "npx electronmon .",
-    "build": "electron-packager . --platform=win32 --arch=x64 --out=deploy --overwrite",
+    "build": "electron-builder",    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
-    "electron": "^30.0.3"
+    "electron": "^30.0.3",
+    "electron-builder": "^24.13.3"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
