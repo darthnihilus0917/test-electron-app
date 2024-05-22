@@ -1,3 +1,12 @@
+// FIELDS
+const sapInputFile = document.getElementById('sap-file');
+const selectMeatCategory = document.getElementById('select-meat');
+const selectProcess = document.getElementById('select-process');
+
+// BUTTONS
+const onProcessButton = document.getElementById('app-process');
+const onExitButton = document.getElementById('app-exit');
+
 const createFileButton = document.getElementById('createFileButton');
 
 createFileButton.addEventListener('click', () => {
@@ -12,5 +21,12 @@ createFileButton.addEventListener('click', () => {
     a.textContent = 'Download example.txt';
 
     document.body.appendChild(a);
+});
 
+onProcessButton.addEventListener('click', () => {
+    console.log('Processing...')
+});
+
+onExitButton.addEventListener('click', () => {
+    console.log('Closing App...')
 });
