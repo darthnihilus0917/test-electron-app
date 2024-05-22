@@ -1,5 +1,55 @@
 body {
+    padding: 0;
+    margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #00AAEF;
+}
+
+.header {
+    background-color: white;
     text-align: center;
-    padding-top: 50px;
+    border-bottom: solid 2px #999;
+}
+
+
+.header img {
+    width: 150px;
+}
+
+.form-content {
+    padding: 20px;
+    padding-top: 10px;
+}
+
+.form-content label {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.form-content h3 {
+    text-align: center;
+    color: white;    
+}
+
+.form-content .sections {
+    margin-bottom: 20px;
+}
+
+.form-content input,
+.form-content select {
+    width: 100%;
+}
+
+.form-content button {
+    width: 50%;
+}
+
+.form-content .button-section {
+    padding-top: 20px;
+}
+
+.form-content .button-section .row > div {
+    margin-bottom: 3px;
+    text-align: center;
 }

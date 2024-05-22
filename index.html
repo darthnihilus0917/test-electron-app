@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Basic Electron App</title>
+    <title>Pilmico | Meat: Customer Capture</title>
     <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="src/css/styles.css" />
 </head>
 <body>
-    <h1>Electron File Creator</h1>
-    <button id="createFileButton">Create Text File</button>
-    <script src="script.js"></script>
+    <div class="main-wrapper">
+        <div class="header">
+            <img src="src/assets/pilmico-goldcoin.png" alt="Pilmico"/>
+        </div>
+        </div>
+        <div class="container form-content">
+            <h3 class="fw-bold">MEAT: Customer Capture</h3>
+            <!-- <button id="createFileButton">Create Text File</button> -->
+            <div class="sections">
+                <div>
+                    <label class="form-label">Provide the SAP Exported File (SAPUI5):</label>
+                    <input type="file" id="sap-file" class="form-control" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                </div>
+            </div>
+            <div class="sections">
+                <div>
+                    <label class="form-label">Select a Meat Category:</label>
+                    <select id="select-meat" class="form-select">
+                        <option value="0">Please select a meat category</option>
+                        <option value="PORKMEAT">Pork Meat</option>
+                        <option value="POULTRY">Poultry</option>
+                        <option value="SWINE">Swine</option>
+                    </select>
+                </div>
+            </div>            
+            <div class="sections">
+                <div>
+                    <label class="form-label">What do you want to do?</label>
+                    <select id="select-process" class="form-select">
+                        <option value="0">Please select a process</option>
+                        <option value="1">Update SOTC</option>
+                        <option value="2">Generate Data Source</option>
+                    </select>
+                </div>
+            </div>
+            <div class="sections button-section">
+                <div class="row">
+                    <div>
+                        <button id="app-process" class="btn btn-dark">Process</button>
+                    </div>
+                    <div>
+                        <button id="app-exit" class="btn btn-outline-light">Close</button>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="src/scripts/script.js"></script>
 </body>
 </html>
