@@ -23,22 +23,26 @@ const validate = () => {
 }
 
 sapInputFile.addEventListener('change', (event) => {
-    alertSection.classList.add("d-none");
-
-    const input = event.target;
-    const file = input.files[0];
-    const extension = file.name.split(".")[1];
-    const allValid = validate();
-    onProcessButton.disabled = (extension !== 'xlsx' || !allValid) ? true : false;
-    
-    if (extension !== 'xlsx') {
-        alertSection.classList.remove("d-none");
-        alertSection.classList.add("alert-danger");
-        alertSection.classList.add("text-danger");
-        alertSection.innerText = "Invalid spreadsheet file.";
-    } else {
+    try {
         alertSection.classList.add("d-none");
-        alertSection.innerText = "";
+
+        const input = event.target;
+        const file = input.files[0];
+        const extension = file.name.split(".")[1];
+        const allValid = validate();
+        onProcessButton.disabled = (extension !== 'xlsx' || !allValid) ? true : false;
+        
+        if (extension !== 'xlsx') {
+            alertSection.classList.remove("d-none");
+            alertSection.classList.add("alert-danger");
+            alertSection.classList.add("text-danger");
+            alertSection.innerText = "Invalid spreadsheet file.";
+        } else {
+            alertSection.classList.add("d-none");
+            alertSection.innerText = "";
+        }
+    } catch(error) {
+        onProcessButton.disabled = true;
     }
 });
 
@@ -88,5 +92,6 @@ onProcessButton.addEventListener('click', async(event) => {
 });
 
 onExitButton.addEventListener('click', () => {
-    console.log('Closing App...')
+    console.log('Closing App...');
+    window.electronAPI.closeWindow();
 });

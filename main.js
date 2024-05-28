@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -17,6 +17,7 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
+            enableRemoteModule: false,
             preload: path.join(__dirname, 'preload.js')
         },
         autoHideMenuBar: false,
@@ -38,6 +39,10 @@ app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
+});
+
+ipcMain.on('close-window', (event) => {
+    BrowserWindow.fromWebContents(event.sender).close();
 });
 
 const expressApp = express();
