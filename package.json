@@ -3,9 +3,21 @@
   "version": "1.0.0",
   "description": "Meats Customer Capture Tool",
   "main": "main.js",
+  "build": {
+    "appId": "pilmico-customer-capture-tool",
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/favicon-32x32.png",
+      "signingHashAlgorithms": [
+        "sha256"
+      ],
+      "publisherName": "BITs Development Team",
+      "verifyUpdateCodeSignature": false
+    }
+  },
   "scripts": {
     "start": "npx electronmon .",
-    "build": "electron-packager . --platform=win32 --arch=x64 --out=deploy --overwrite",
+    "build": "electron-builder",    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "BITs Development Team / JC santos",
