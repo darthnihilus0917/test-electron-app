@@ -10,12 +10,8 @@ const generatePorkmeat = async(meat, action) => {
     porkmeat.meat = meat;
     porkmeat.action = action;
     const { isProcessed, statusMsg } = await porkmeat.generateOutputData();
-    if (isProcessed) {
-        porkmeat.log();
-        console.log(statusMsg);
-    } else {
-        console.log(statusMsg);
-    }
+    if (isProcessed) porkmeat.log();
+    return statusMsg;
 }
 
 const generatePoultry = async(meat, action) => {    
@@ -23,12 +19,8 @@ const generatePoultry = async(meat, action) => {
     poultry.meat = meat;
     poultry.action = action;
     const { isProcessed, statusMsg } = await poultry.generateOutputData();
-    if (isProcessed) {
-        poultry.log();
-        console.log(statusMsg);
-    } else {
-        console.log(statusMsg);
-    }
+    if (isProcessed) poultry.log();
+    return statusMsg;
 }
 
 const generateSwine = async(meat, action) => {    
@@ -36,12 +28,8 @@ const generateSwine = async(meat, action) => {
     swine.meat = meat;
     swine.action = action;
     const { isProcessed, statusMsg } = await swine.generateOutputData();
-    if (isProcessed) {
-        swine.log();
-        console.log(statusMsg);
-    } else {
-        console.log(statusMsg);
-    }
+    if (isProcessed) swine.log();
+    return statusMsg;
 }
 
 module.exports = {

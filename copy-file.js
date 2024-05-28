@@ -2,12 +2,11 @@ const path = require('path');
 const fsFolders = require('fs-extra');
 const fs = require('fs');
 
-const destinationBuildFolder = "./deploy/tmm";
+const destinationBuildFolder = "./deploy/customer-capture-tool-win32-x64";
 
 const folderList = [
-    'meat_output',
     'output',
-    'raw_data',
+    'sap',
     'templates',
     'monitoring'
 ]

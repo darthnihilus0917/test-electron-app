@@ -1,7 +1,0 @@
-
-5/28/2024 4:51:05 PM - undefined - undefined - processed
-5/28/2024 4:52:10 PM - undefined - undefined - processed
-5/28/2024 7:28:24 PM - PORK MEATS - COPY SOTC DATA - processed
-5/28/2024 7:29:05 PM - SWINE - GENERATE DATA SOURCE - processed
-5/28/2024 7:37:11 PM - POULTRY - GENERATE DATA SOURCE - processed
-5/28/2024 7:39:19 PM - SWINE - COPY SOTC DATA - processed
