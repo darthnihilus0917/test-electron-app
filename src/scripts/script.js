@@ -59,6 +59,12 @@ onProcessButton.addEventListener('click', async(event) => {
     try {
         alertSection.classList.add("d-none");
 
+        onExitButton.disabled = true;
+        event.target.disabled = true;
+        event.target.innerHTML = `<div class="spinner-border spinner-border-sm text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div> Processing...`;
+
         const endpont = (selectProcess.value === "COPY SOTC DATA") ? "sotc" : "generate";
         const payload = JSON.stringify({ 
             "sapFile": sapInputFile.value,
@@ -79,14 +85,18 @@ onProcessButton.addEventListener('click', async(event) => {
         const { msg } = await response.json();
 
         alertSection.classList.remove("d-none");
-        const alertCss = (response.statusText === "OK") ? "alert-success" : "alert-danger";
+        const alertCss = (response.statusText === "OK") ? "bg-success" : "bg-danger";
         alertSection.classList.add(alertCss);
         alertSection.innerText = msg;
+
+        event.target.innerHTML = `Process`;
+        event.target.disabled = false;
+        onExitButton.disabled = false;
         
     } catch(error) {
 
         alertSection.classList.remove("d-none");
-        alertSection.classList.add("alert-danger");
+        alertSection.classList.add("bg-danger");
         alertSection.innerText = `ERROR: ${error}`;
     }
 });

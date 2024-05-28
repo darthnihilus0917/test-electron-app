@@ -13,7 +13,7 @@ const { appLabels } = require('./src/scripts/lib/constants/constants');
 function createWindow() {
     const win = new BrowserWindow({
         width: 600,
-        height: 700,
+        height: 725,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
