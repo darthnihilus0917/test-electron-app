@@ -14,7 +14,7 @@
         </div>
         <div class="container form-content">
             <h3 class="fw-bold text-uppercase">Meats Customer Capture Tool</h3>
-            <!-- <button id="createFileButton">Create Text File</button> -->
+            <div id="validation-alert" class="alert alert-danger d-none" role="alert"></div>            
             <div class="sections">
                 <div>
                     <label class="form-label">Provide the SAP Exported File (SAPUI5):</label>
@@ -26,7 +26,7 @@
                     <label class="form-label">Select a Meat Category:</label>
                     <select id="select-meat" class="form-select">
                         <option value="0">Please select a meat category</option>
-                        <option value="PORKMEAT">Pork Meat</option>
+                        <option value="PORK MEATS">Pork Meat</option>
                         <option value="POULTRY">Poultry</option>
                         <option value="SWINE">Swine</option>
                     </select>
@@ -37,8 +37,8 @@
                     <label class="form-label">What do you want to do?</label>
                     <select id="select-process" class="form-select">
                         <option value="0">Please select a process</option>
-                        <option value="1">Update SOTC Reference</option>
-                        <option value="2">Generate Data Source</option>
+                        <option value="COPY SOTC DATA">Update SOTC Reference</option>
+                        <option value="GENERATE DATA SOURCE">Generate Data Source</option>
                     </select>
                 </div>
             </div>
