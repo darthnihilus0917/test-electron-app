@@ -20,7 +20,7 @@ function createWindow() {
             enableRemoteModule: false,
             preload: path.join(__dirname, 'preload.js')
         },
-        autoHideMenuBar: false,
+        autoHideMenuBar: true,
         icon: path.join(__dirname, './src/assets/favicon-32x32.png')
     });
 
