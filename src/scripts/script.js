@@ -35,7 +35,7 @@ sapInputFile.addEventListener('change', (event) => {
         if (extension !== 'xlsx') {
             alertSection.classList.remove("d-none");
             alertSection.classList.add("bg-danger");
-            alertSection.innerText = "Invalid spreadsheet file.";
+            alertSection.innerText = "ERROR: Invalid spreadsheet file.";
         } else {
             alertSection.classList.add("d-none");
             alertSection.innerText = "";
