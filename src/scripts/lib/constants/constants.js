@@ -10,6 +10,7 @@ const appLabels = {
     processNotAvailable: "This process is not available to",
     pdfConvertion: "PDF conversion complete! Please check the raw data converted folder.",
     noSapFile: "No SAP exported file found!",
+    invalidFile: "ERROR: Invalid SAP exported file",
     tooManyFiles: "Too many SOTC files to process. Only one file is allowed in the folder.",
     sotcCleanUp: "Cleaning up related worksheets...",
 }

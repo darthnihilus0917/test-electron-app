@@ -2,7 +2,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const ExcelJS = require('exceljs');
-const fs = require('fs')
+const fs = require('fs');
+const path = require('path');
 const { Log } = require('./logs');
 const { DataFiles } = require('./files');
 const { appLabels } = require('../constants/constants');
@@ -19,6 +20,9 @@ class Porkmeat {
     setAction(action) { this.action = action; }
     getAction() { return this.action; }
 
+    setAction(sapFile) { this.sapFile = sapFile; }
+    getAction() { return this.sapFile; }
+
     log() {
         const log = new Log();
         log.filePath = `${process.env.LOG_FILE}`;
@@ -32,8 +36,23 @@ class Porkmeat {
             const sourceFile = `${process.env.RAW_DATA_SAP}/${filename}`;
             const sourceWB = new ExcelJS.Workbook();
 
-            return await sourceWB.xlsx.readFile(sourceFile).then(() => {
+            return await sourceWB.xlsx.readFile(sourceFile).then(async() => {
                 const sourceSheet = sourceWB.worksheets[1];
+
+                // check if sheetname is 'SAPUI5 Export'
+                if (sourceWB.worksheets[1].name !== process.env.RAW_DATA_SAP_SHEET) {
+                    return await false;
+                }
+
+                // check if column count is 29
+                if (sourceSheet.columnCount > process.env.RAW_DATA_COLUMN_COUNT || sourceSheet.columnCount < process.env.RAW_DATA_COLUMN_COUNT) {
+                    return await false;
+                }
+
+                // check if sheet has data
+                if (sourceSheet.rowCount <= 1) {
+                    return await false;
+                }
 
                 const destinationWB = new ExcelJS.Workbook();
                 destinationWB.xlsx.readFile(`${process.env.OUTPUT_FILE}`).then(async() => {
@@ -136,8 +155,9 @@ class Porkmeat {
                     }); 
                 });
 
-            }).then(async() => {
-                return await true;
+            }).then(async(data) => {
+                return await (!data && data !== undefined) ? false : true;
+
             }).catch(async(err) => {
                 console.error(err);
                 return await false;
@@ -209,39 +229,24 @@ class Porkmeat {
     async generateOutputData() {
         try {
             const meat = this.meat;
+            const sapFile = path.basename(this.sapFile);
             const fileManager = new DataFiles();
             fileManager.source = process.env.RAW_DATA_SAP;
-            const files = fileManager.listFiles().filter(f => f.includes('.xlsx') && !f.includes('~'));
-            if (files.length > 0) {
-                let processResult = [];
-                const promises = files.map(async(file) => {
-                    return await this.processGeneration(file).then((item) => {
-                        return true;
+            
+            return await this.processGeneration(sapFile).then((processed) => {       
+                return {
+                    isProcessed: processed,
+                    statusMsg: (processed) ? `${meat}: ${appLabels.dataSourceMsg}` : appLabels.invalidFile
+                }
+            }).then((res) => {
+                return res;
 
-                    }).then((res) => {
-                        processResult.push(res);
-                        return res;
-
-                    }).catch((error) => {
-                        console.log(error)
-                        return false;
-                    });
-                });
-                return Promise.all(promises).then(function(results) {
-                    if (results.includes(true)) {
-                        return {
-                            isProcessed: true,
-                            statusMsg: `${meat}: ${appLabels.dataSourceMsg}`
-                        }
-                    }
-                });                
-
-            } else {
+            }).catch((error) => {
                 return {
                     isProcessed: false,
-                    statusMsg: `${appLabels.noSapFile.toUpperCase()}`
+                    statusMsg: `${error}`
                 }
-            }
+            });
 
         } catch(e) {
             return {

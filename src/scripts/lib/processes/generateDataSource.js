@@ -5,31 +5,34 @@ const { Porkmeat } = require('../classes/porkmeat');
 const { Poultry } = require('../classes/poultry');
 const { Swine } = require('../classes/swine');
 
-const generatePorkmeat = async(meat, action) => {    
+const generatePorkmeat = async(meat, action, sapFile) => {    
     const porkmeat = new Porkmeat();
     porkmeat.meat = meat;
     porkmeat.action = action;
-    const { isProcessed, statusMsg } = await porkmeat.generateOutputData();
-    if (isProcessed) porkmeat.log();
-    return statusMsg;
+    porkmeat.sapFile = sapFile;
+    const result = await porkmeat.generateOutputData();
+    if (result.isProcessed) porkmeat.log();
+    return result;
 }
 
-const generatePoultry = async(meat, action) => {    
+const generatePoultry = async(meat, action, sapFile) => {    
     const poultry = new Poultry();
     poultry.meat = meat;
     poultry.action = action;
-    const { isProcessed, statusMsg } = await poultry.generateOutputData();
-    if (isProcessed) poultry.log();
-    return statusMsg;
+    poultry.sapFile = sapFile;
+    const result = await poultry.generateOutputData();
+    if (result.isProcessed) poultry.log();
+    return result;
 }
 
-const generateSwine = async(meat, action) => {    
+const generateSwine = async(meat, action, sapFile) => {    
     const swine = new Swine();
     swine.meat = meat;
     swine.action = action;
-    const { isProcessed, statusMsg } = await swine.generateOutputData();
-    if (isProcessed) swine.log();
-    return statusMsg;
+    swine.sapFile = sapFile;
+    const result = await swine.generateOutputData();
+    if (result.isProcessed) swine.log();
+    return result;
 }
 
 module.exports = {

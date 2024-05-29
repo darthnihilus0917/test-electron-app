@@ -8,7 +8,7 @@ const cors = require('cors');
 
 const { buildPorkmeat, buildPoultry, buildSwine } = require('./src/scripts/lib/processes/buildSOTC');
 const { generatePorkmeat, generatePoultry, generateSwine } = require('./src/scripts/lib/processes/generateDataSource');
-const { appLabels } = require('./src/scripts/lib/constants/constants');
+// const { appLabels } = require('./src/scripts/lib/constants/constants');
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -20,7 +20,7 @@ function createWindow() {
             enableRemoteModule: false,
             preload: path.join(__dirname, 'preload.js')
         },
-        autoHideMenuBar: true,
+        autoHideMenuBar: false,
         icon: path.join(__dirname, './src/assets/favicon-32x32.png')
     });
 
@@ -71,15 +71,14 @@ expressApp.post('/generate', async(req, res) => {
     let response = null;
     switch(meat) {
         case "SWINE":
-            response = await generateSwine(meat, action);
+            response = await generateSwine(meat, action, sapFile);
             break;
         case "POULTRY":
-            response = await generatePoultry(meat, action);
+            response = await generatePoultry(meat, action, sapFile);
             break;
         default:
-            response = await generatePorkmeat(meat, action);
-    }  
-    console.log(response);
+            response = await generatePorkmeat(meat, action, sapFile);
+    }
     res.json({ msg: response });
 });
 

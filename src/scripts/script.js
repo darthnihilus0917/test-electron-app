@@ -34,8 +34,7 @@ sapInputFile.addEventListener('change', (event) => {
         
         if (extension !== 'xlsx') {
             alertSection.classList.remove("d-none");
-            alertSection.classList.add("alert-danger");
-            alertSection.classList.add("text-danger");
+            alertSection.classList.add("bg-danger");
             alertSection.innerText = "Invalid spreadsheet file.";
         } else {
             alertSection.classList.add("d-none");
@@ -82,12 +81,16 @@ onProcessButton.addEventListener('click', async(event) => {
         };
 
         const response = await fetch(`http://localhost:5555/${endpont}`, requestOptions);
+        // console.log(response)
+        // console.log(response.json())
         const { msg } = await response.json();
 
         alertSection.classList.remove("d-none");
-        const alertCss = (response.statusText === "OK") ? "bg-success" : "bg-danger";
+        alertSection.classList.remove("bg-danger");
+
+        const alertCss = (response.statusText === "OK" && msg.isProcessed) ? "bg-success" : "bg-danger";
         alertSection.classList.add(alertCss);
-        alertSection.innerText = msg;
+        alertSection.innerText = msg.statusMsg;
 
         event.target.innerHTML = `Process`;
         event.target.disabled = false;
