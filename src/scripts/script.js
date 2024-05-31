@@ -84,6 +84,7 @@ onProcessButton.addEventListener('click', async(event) => {
         // console.log(response)
         // console.log(response.json())
         const { msg } = await response.json();
+        console.log(msg)
 
         alertSection.classList.remove("d-none");
         alertSection.classList.remove("bg-danger");

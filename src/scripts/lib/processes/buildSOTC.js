@@ -10,9 +10,9 @@ const buildPorkmeat = async(meat, action) => {
     porkmeat.meat = meat;
     porkmeat.action = action;
     await porkmeat.clearSOTCPickupDataSheet();
-    const { isProcessed, statusMsg } = await porkmeat.buildSOTC();
-    if (isProcessed) porkmeat.log();
-    return statusMsg;
+    const result = await porkmeat.buildSOTC();
+    if (result.isProcessed) porkmeat.log();
+    return result;
 }
 
 const buildPoultry = async(meat, action) => {
@@ -20,9 +20,9 @@ const buildPoultry = async(meat, action) => {
     poultry.meat = meat;
     poultry.action = action;
     await poultry.clearSOTCPickupDataSheet();
-    const { isProcessed, statusMsg } = await poultry.buildSOTC();
-    if (isProcessed) poultry.log();
-    return statusMsg;
+    const result = await poultry.buildSOTC();
+    if (result.isProcessed) poultry.log();
+    return result;
 }
 
 const buildSwine = async(meat, action) => {
@@ -31,9 +31,9 @@ const buildSwine = async(meat, action) => {
     swine.action = action;
     const isCleared = await swine.clearSOTCPickupDataSheet();
     if (isCleared) {
-        const { isProcessed, statusMsg } = await swine.buildSOTC();
-        if (isProcessed) swine.log();
-        return statusMsg;
+        const result = await swine.buildSOTC();
+        if (result.isProcessed) swine.log();
+        return result;
     }
 }
 
