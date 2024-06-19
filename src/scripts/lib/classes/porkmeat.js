@@ -65,8 +65,9 @@ class Porkmeat {
 
                     sourceSheet.eachRow({ includeEmpty: false, firstRow: 2 }, (row, rowNumber) => {
                         if (rowNumber >  1) {
-                            if (!row.getCell(14).value.includes("14") && !row.getCell(12).value.includes("POS") 
-                                && row.getCell(28).value.toLowerCase() === this.meat.toLowerCase()) {
+                            if (row.getCell(14).value !== 14 && row.getCell(28).value.toLowerCase() === this.meat.toLowerCase()) {                            
+                            // if (!row.getCell(14).value.includes("14") && !row.getCell(12).value.includes("POS") 
+                            //     && row.getCell(28).value.toLowerCase() === this.meat.toLowerCase()) {
 
                                 const journalEntryDate = new Date(row.getCell(15).value);
                                 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};                            

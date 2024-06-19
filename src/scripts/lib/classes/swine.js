@@ -64,8 +64,9 @@ class Swine {
 
                     sourceSheet.eachRow({ includeEmpty: false, firstRow: 2 }, (row, rowNumber) => {
                         if (rowNumber >  1) {
-                            if (!row.getCell(14).value.includes("14") && !row.getCell(12).value.includes("POS") 
-                                && row.getCell(28).value.toLowerCase() === 'live') {
+                            if (row.getCell(14).value !== 14 && row.getCell(28).value.toLowerCase() === 'live') {
+                            // if (!row.getCell(14).value.includes("14") && !row.getCell(12).value.includes("POS") 
+                            //     && row.getCell(28).value.toLowerCase() === 'live') {
 
                                 const journalEntryDate = new Date(row.getCell(15).value);
                                 const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',};                            
@@ -78,6 +79,8 @@ class Swine {
                                 const soNo = parseInt(row.getCell(21).value);
                                 const materialId = parseInt(row.getCell(16).value);
                                 const helperRef = `${soNo}${materialId}`;
+
+                                const distChannel = (typeof row.getCell(14).value === 'number') ? row.getCell(14).value : row.getCell(14).value.trim();
 
                                 const newRowData = [
                                     journalEntryDate.getFullYear(), // YEAR
@@ -103,7 +106,7 @@ class Swine {
                                     "-", // / KILO
                                     "-", // HEAD
                                     row.getCell(12).value.trim(), // COMPLETE CUSTOMER NAME
-                                    row.getCell(14).value.trim(), // DIST. CHANNEL
+                                    distChannel, // DIST. CHANNEL
                                     helperRef
                                 ];
                                 // console.log(newRowData);
