@@ -117,7 +117,7 @@ class Porkmeat {
 
                             // COMPLETE CUSTOMER NAME
                             const finalCustomerValue = `UPPER(IF(IFERROR(VLOOKUP(E${rowNumber},SOTC_PORKMEAT!A2:B${sotcSheet.lastRow.number},{2},FALSE), TRUE)=TRUE, VLOOKUP(E${rowNumber},PICKUP_PORKMEAT!A2:B${pickupSheet.lastRow.number},{2},FALSE),VLOOKUP(E${rowNumber},SOTC_PORKMEAT!A2:B${sotcSheet.lastRow.number},{2},FALSE)))`;
-                            if (row.getCell(6).value === 'ONE TIME CUSTOMER') {
+                            if (row.getCell(6).value === 'ONE TIME CUSTOMER' || row.getCell(6).value === "WALK-IN") {
                                 row.getCell(6).value = { formula: `VLOOKUP(${finalCustomerValue}, CUSTOMERS_PORKMEAT!A2:B${customerSheet.lastRow.number},{2},FALSE)`}
                             }
                             
